@@ -1,0 +1,76 @@
+.container{
+  width: 100%;
+  height: max-content;
+  /* margin:0 0 auto; */
+}
+
+h1{
+  text-align: center;
+}
+
+main{
+  width: 100%;
+  border-radius: 12px;
+}
+
+.mainDiv{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+
+table{
+  width: 100%;
+  border: 2px solid black;
+  /* border-radius: 12px; */
+  border-collapse: collapse;
+}
+
+th, td{
+  text-align: center;
+  padding: 8px;
+}
+
+th{
+  background-color: rgb(215, 177, 252);
+}
+
+tr:nth-child(even){
+  background-color: rgb(215, 177, 252);
+}
+tr:nth-child(odd){
+  background-color: rgb(190, 132, 248);
+}
+
+tr:hover{
+  background-color: rgb(167, 94, 236);
+}
+
+form div{
+  margin: 3px 0 3px 0; 
+}
+
+fieldset{
+  width: fit-content;
+}
+
+label{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif, Courier, monospace;
+  font: bolder;
+}
+
+input[type="text"], input[type="number"], input[type="date"]{
+  height: 20px;
+  padding: 3px;
+  border-radius: 4px;
+}
+
+button{
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  padding:8px;
+  margin: 0 5px 0 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
