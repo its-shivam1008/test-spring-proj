@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import "./App.css";
 import { BiLoaderAlt } from "react-icons/bi";
+import { Button } from './components/ui/button';
+import { DataTable } from './components/DataTable';
 
 const App = () => {
 
@@ -154,6 +156,64 @@ const App = () => {
     setIsLock(false);
   }
 
+  const columns = [
+    {
+      accessorKey: "name",
+      header: "Name",
+    cell: ({ row }) => {
+        const name = row.getValue('name')
+  
+        return <div className="text-left font-medium">{name}</div>
+      }
+    },
+    {
+      accessorKey: "dob",
+      header: "Date of Birth",
+    },
+    {
+      accessorKey: "age",
+      header: "Age",
+    },
+    {
+      accessorKey: "doj",
+      header: "Date of Joining",
+    },
+    {
+      accessorKey: "mobile",
+      header: "Mobile",
+    },
+    {
+      accessorKey: "address",
+      header: "Address",
+    },
+    {
+      accessorKey: "city",
+      header: "City",
+    },
+    {
+      accessorKey: "state",
+      header: "State",
+    },
+    {
+      accessorKey: "country",
+      header: "Country",
+    },
+  ]
+
+  const dataOk = [ 
+    {
+      name: "Shivam Shukla",
+      age: 21,
+      dob: "4-12-2003",
+      doj: "21-05-2025",
+      mobile:"7985218893",
+      address:"19/71, RamNarayan Bazaar",
+      city:"Kanpur",
+      state:"Uttar Pradesh",
+      country:"India",
+    }, 
+  ]
+
 
   return (
     <div className='container'>
@@ -164,6 +224,7 @@ const App = () => {
             
             <form action={handelSubmit}>
               <div className='flex justify-between'>
+              <Button variant="destructive">Button</Button>
               <button type="submit" >Add</button>
               <button type="button" onClick={handleEditUser}>Edit</button>
               <button type="button" onClick={handleFindUser}>Find</button>
@@ -224,7 +285,7 @@ const App = () => {
          
         </div>
         <hr />
-        {
+        {/* {
           !isLoading ? <table border={2}>
           <thead>
             <tr>
@@ -259,7 +320,10 @@ const App = () => {
             }
           </tbody>
         </table> : <BiLoaderAlt />
-        }
+        } */}
+        <div className="w-[100dvw] mx-auto">
+          <DataTable columns={columns} data={dataOk}></DataTable> 
+        </div>
       </main>
     </div>
   )

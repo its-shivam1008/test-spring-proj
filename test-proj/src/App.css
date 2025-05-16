@@ -19,33 +19,6 @@ main{
 }
 
 
-table{
-  width: 100%;
-  border: 2px solid black;
-  /* border-radius: 12px; */
-  border-collapse: collapse;
-}
-
-th, td{
-  text-align: center;
-  padding: 8px;
-}
-
-th{
-  background-color: rgb(215, 177, 252);
-}
-
-tr:nth-child(even){
-  background-color: rgb(215, 177, 252);
-}
-tr:nth-child(odd){
-  background-color: rgb(190, 132, 248);
-}
-
-tr:hover{
-  background-color: rgb(167, 94, 236);
-}
-
 form div{
   margin: 3px 0 3px 0; 
 }
@@ -65,7 +38,7 @@ input[type="text"], input[type="number"], input[type="date"]{
   border-radius: 4px;
 }
 
-button{
+/* button{
   background-color: black;
   color: white;
   font-weight: bold;
@@ -73,4 +46,4 @@ button{
   margin: 0 5px 0 5px;
   border-radius: 4px;
   cursor: pointer;
-}
+} */
