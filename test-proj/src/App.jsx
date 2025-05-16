@@ -255,6 +255,18 @@ const App = () => {
       state:"Uttar Pradesh",
       country:"India",
     }, 
+    {
+      id:"lol1234",
+      name: "Shivam Shukla",
+      age: 21,
+      dob: "4-12-2003",
+      doj: "21-05-2025",
+      mobile:"7985218893",
+      address:"19/71, RamNarayan Bazaar",
+      city:"Kanpur",
+      state:"Uttar Pradesh",
+      country:"India",
+    }, 
   ]
 
 
