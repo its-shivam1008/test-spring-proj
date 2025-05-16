@@ -268,77 +268,77 @@ const App = () => {
       country:"India",
     }, 
   ]
-
-
   return (
-    <div className='container'>
+    <div className='container mx-auto'>
       <main >
         <div className='mainDiv'>
 
           <div className='box'>
             
-            <form action={handelSubmit}>
-              <div className='flex justify-between'>
-              <button type="submit" >Add</button>
-              <button type="button" onClick={handleEditUser}>Edit</button>
-              <button type="button" onClick={handleFindUser}>Find</button>
-              <button type="button" onClick={handleDeleteUser}>Delete</button>
-              <button type="button" onClick={handleSaveUser}>Save</button>
-              </div>
-              <div>
-                <label className={`${isLock ? "text-gray-400" : "text-black"}`} htmlFor="name">Name : </label>
-                <input type="text" name="name" id="name" className='p-2 h-[20px] w-40 border-2'  disabled={isLock} onChange={handleChannge} value={changeValue.name}/>
-              </div>
-              <div className="flex justify-between">
-              <div>
-                <label className={`${isLock ? "text-gray-400" : "text-black"}`} htmlFor="dob">Date of birth : </label>
-                <input type="date" name="dob" id="dob" className='p-2 h-[20px] w-30 border-2' disabled={isLock} onChange={handleChannge} value={changeValue.dob}/>
-              </div>
-              <div>
-                <label className={`${isLock ? "text-gray-400" : "text-black"}`} htmlFor="age">Age : </label>
-                <input type="number" name="age" id="age" disabled={true} className='p-2 h-[20px] w-30 border-2'  value={changeValue.age}/>
-              </div>
-              </div>
-              <div className="flex justify-between">
-                <div>
-                  <label className={`${isLock ? "text-gray-400" : "text-black"}`} htmlFor="doj">Date of joining : </label>
-                  <input type="date" name="doj" id="doj" className='p-2 h-[20px] w-30 border-2' disabled={isLock} onChange={handleChannge} value={changeValue.doj}/>
+            <form action={handelSubmit} className='flex justify-center'>
+              <div className='space-y-4'>
+                <div className='flex justify-around py-3'>
+                <Button className='hover:bg-gray-100/50 cursor-pointer transition-colors duration-200 hover:border-black border shadow-lg shadow-orange-200 border-transparent hover:text-black' type="submit" >Add</Button>
+                <Button className='hover:bg-gray-100/50 cursor-pointer transition-colors duration-200 hover:border-black border shadow-lg shadow-orange-200 border-transparent hover:text-black' type="button" variant="secondary" onClick={handleEditUser}>Edit</Button>
+                <Button className='hover:bg-gray-100/50 cursor-pointer transition-colors duration-200 hover:border-black border shadow-lg shadow-orange-200 border-transparent hover:text-black' type="button" variant="secondary" onClick={handleFindUser}>Find</Button>
+                <Button className='hover:bg-gray-100/50 cursor-pointer transition-colors duration-200 hover:border-red-500 border shadow-lg shadow-orange-200 border-transparent hover:text-red-500' variant={'destructive'} type="button" onClick={handleDeleteUser}>Delete</Button>
+                <Button className='hover:bg-gray-100/50 cursor-pointer transition-colors duration-200 hover:border-black border shadow-lg shadow-orange-200 border-transparent hover:text-black' type="button" onClick={handleSaveUser}>Save</Button>
                 </div>
                 <div>
-                  <label className={`${isLock ? "text-gray-400" : "text-black"}`} htmlFor="mobile">Mobile : </label>
-                  <input type="text" name="mobile" id="mobile" className='p-2 h-[20px] w-30 border-2' maxLength={10} disabled={isLock} onChange={handleChannge} value={changeValue.mobile}/>
+                  <label className={`${isLock ? "text-gray-400" : "text-black"}`} htmlFor="name">Name : </label>
+                  <input type="text" name="name" id="name" className='w-55 p-2 rounded-[6px] outline-gray-400 outline-[2px] focus:outline-black placeholder:text-gray-500'  disabled={isLock} onChange={handleChannge} value={changeValue.name} placeholder='Sachin'/>
                 </div>
-              </div>
-              <div>
-                <label className={`${isLock ? "text-gray-400" : "text-black"}`} htmlFor="address">Address : </label>
-                <input type="text" name="address" id="address" className='p-2 border-2' maxLength={100} disabled={isLock} onChange={handleChannge} value={changeValue.address}/>
-              </div>
-              <div>
-                <label className={`${isLock ? "text-gray-400" : "text-black"}`} htmlFor="city">City : </label>
-                <select onChange={handleChannge} value={changeValue.city} name="city" id="city" disabled={isLock}>
-                  <option value="">Select a city</option>
-                  <option onChange={handleChannge} onClick={() => setIsLoadingPlace(true)} value="Kanpur">Kanpur</option>
-                  <option onChange={handleChannge} onClick={() => setIsLoadingPlace(true)} value="Agra">Agra</option>
-                  <option onChange={handleChannge} onClick={() => setIsLoadingPlace(true)} value="Surat">Surat</option>
-                  <option onChange={handleChannge} onClick={() => setIsLoadingPlace(true)} value="Jhansi">Jhansi</option>
-                </select>
-                {/* <input type="text" name="city" id="city" className='p-2 h-[20px] w-30 border-2' disabled={isLock} onChange={handleChannge} value={changeValue.city}/> */}
-              </div>
-              <div className='flex justify-between'>
+                <div className="flex justify-between">
                 <div>
-                  <label className={`${isLock ? "text-gray-400" : "text-black"}`} htmlFor="state">State : </label>
-                  {isLoadingPlace ? <BiLoaderAlt /> : <input type="text" name="state" id="state" className='p-2 h-[20px] w-30 border-2' disabled={isLock} onChange={handleChannge} value={changeValue.state}/>}
+                  <label className={`${isLock ? "text-gray-400" : "text-black"}`} htmlFor="dob">Date of birth : </label>
+                  <input type="date" name="dob" id="dob" className='w-55 p-2 rounded-[6px] outline-gray-400 outline-[2px] focus:outline-black placeholder:text-gray-500' disabled={isLock} onChange={handleChannge} value={changeValue.dob}/>
                 </div>
                 <div>
-                  <label className={`${isLock ? "text-gray-400" : "text-black"}`} htmlFor="state">Country : </label>
-                  <input type="text" name="state" id="state" className='p-2 h-[20px] w-30 border-2' value={"India"}/>
+                  <label className={`${isLock ? "text-gray-400" : "text-black"}`} htmlFor="age">Age : </label>
+                  <input type="number" name="age" id="age" disabled={true} className='w-12 pl-3 py-2 text-center rounded-[6px] outline-gray-400 outline-[2px] focus:outline-black placeholder:text-gray-500'  value={changeValue.age}/>
+                </div>
+                </div>
+                <div className="flex justify-between gap-2">
+                  <div>
+                    <label className={`${isLock ? "text-gray-400" : "text-black"}`} htmlFor="doj">Date of joining : </label>
+                    <input type="date" name="doj" id="doj" className='w-55 p-2 rounded-[6px] outline-gray-400 outline-[2px] focus:outline-black placeholder:text-gray-500' disabled={isLock} onChange={handleChannge} value={changeValue.doj}/>
+                  </div>
+                  <div>
+                    <label className={`${isLock ? "text-gray-400" : "text-black"}`} htmlFor="mobile">Mobile : </label>
+                    <input type="text" name="mobile" id="mobile" className='w-55 p-2 rounded-[6px] outline-gray-400 outline-[2px] focus:outline-black placeholder:text-gray-500' maxLength={10} disabled={isLock} onChange={handleChannge} value={changeValue.mobile}/>
+                  </div>
+                </div>
+                <div>
+                  <label className={`${isLock ? "text-gray-400" : "text-black"}`} htmlFor="address">Address : </label>
+                  <input type="text" name="address" id="address" className='w-55 p-2 rounded-[6px] outline-gray-400 outline-[2px] focus:outline-black placeholder:text-gray-500' maxLength={100} disabled={isLock} onChange={handleChannge} value={changeValue.address}/>
+                </div>
+                <div>
+                  <label className={`${isLock ? "text-gray-400" : "text-black"}`} htmlFor="city">City : </label>
+                  <select onChange={handleChannge} value={changeValue.city} name="city" id="city" disabled={isLock} className='w-fit p-2  text-gray-600 text-center rounded-[6px] outline-gray-400 outline-[2px] focus:outline-black placeholder:text-gray-500'>
+                    <option value="">Select a city</option>
+                    <option onChange={handleChannge} onClick={() => setIsLoadingPlace(true)} value="Kanpur">Kanpur</option>
+                    <option onChange={handleChannge} onClick={() => setIsLoadingPlace(true)} value="Agra">Agra</option>
+                    <option onChange={handleChannge} onClick={() => setIsLoadingPlace(true)} value="Surat">Surat</option>
+                    <option onChange={handleChannge} onClick={() => setIsLoadingPlace(true)} value="Jhansi">Jhansi</option>
+                  </select>
+                  {/* <input type="text" name="city" id="city" className='w-55 p-2 rounded-[6px] outline-gray-400 outline-[2px] focus:outline-black placeholder:text-gray-500' disabled={isLock} onChange={handleChannge} value={changeValue.city}/> */}
+                </div>
+                <div className='flex justify-between'>
+                  <div>
+                    <label className={`${isLock ? "text-gray-400" : "text-black"}`} htmlFor="state">State : </label>
+                    {isLoadingPlace ? <BiLoaderAlt /> : <input type="text" name="state" id="state" className='w-55 p-2 rounded-[6px] outline-gray-400 outline-[2px] focus:outline-amber-500 placeholder:text-gray-500' disabled={isLock} onChange={handleChannge} value={changeValue.state}/>}
+                  </div>
+                  <div>
+                    <label className={`${isLock ? "text-gray-400" : "text-black"}`} htmlFor="state">Country : </label>
+                    <input type="text" name="state" id="state" className='w-55 p-2 rounded-[6px] outline-gray-400 outline-[2px] focus:outline-amber-500 placeholder:text-gray-500' value={"India"}/>
+                  </div>
                 </div>
               </div>
             </form>
           </div>
          
         </div>
-        <hr />
+        <hr className='my-4' />
         {/* {
           !isLoading ? <table border={2}>
           <thead>
@@ -375,9 +375,7 @@ const App = () => {
           </tbody>
         </table> : <BiLoaderAlt />
         } */}
-        <div className="w-[100dvw] mx-auto">
-          <DataTable columns={columns} data={dataOk}></DataTable> 
-        </div>
+        <DataTable columns={columns} data={dataOk}></DataTable> 
       </main>
     </div>
   )
