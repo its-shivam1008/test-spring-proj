@@ -38,7 +38,6 @@ const App = () => {
   return (
     <>
       <Dashboard></Dashboard>
-        {/* <Outlet/> */}
     </>
     // <div className='container mx-auto'>
     //   <main >

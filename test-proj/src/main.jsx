@@ -5,6 +5,8 @@ import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import AllEmployee from './components/AllEmployee'
 import AddForm from './components/AddForm'
+import GetEmployee from './components/GetEmployee'
+import UpdateEmployee from './components/UpdateEmployee'
 
 
 const router = createBrowserRouter([
@@ -19,6 +21,14 @@ const router = createBrowserRouter([
       {
         path:"/employees",
         element:<AllEmployee/>
+      },
+      {
+        path:"/get-employee",
+        element:<GetEmployee/>
+      },
+      {
+        path:"/update-employee",
+        element:<UpdateEmployee/>
       },
     ]
   }

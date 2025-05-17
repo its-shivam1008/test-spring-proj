@@ -26,10 +26,6 @@ const AllEmployee = () => {
           }
         },
         {
-          accessorKey: "dob",
-          header: "Date of Birth",
-        },
-        {
           accessorKey: "age",
           header: "Age",
         },
@@ -40,14 +36,6 @@ const AllEmployee = () => {
         {
           accessorKey: "mobile",
           header: "Mobile",
-        },
-        {
-          accessorKey: "address",
-          header: "Address",
-        },
-        {
-          accessorKey: "city",
-          header: "City",
         },
         {
           accessorKey: "state",

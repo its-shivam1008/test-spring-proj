@@ -46,12 +46,12 @@ const data = {
     },
     {
       name: "Find a employee",
-      url: "#",
+      url: "/get-employee",
       icon: PieChart,
     },
     {
       name: "Edit Employee",
-      url: "#",
+      url: "/update-employee",
       icon: Map,
     },
   ],
