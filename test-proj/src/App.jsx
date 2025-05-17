@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./App.css";
 import Dashboard from './components/Dashboard';
+// import { Outlet } from 'react-router-dom';
 
 const App = () => {
 
@@ -35,7 +36,10 @@ const App = () => {
   }
  
   return (
-    <Dashboard></Dashboard>
+    <>
+      <Dashboard></Dashboard>
+        {/* <Outlet/> */}
+    </>
     // <div className='container mx-auto'>
     //   <main >
     //     <div className='mainDiv'>

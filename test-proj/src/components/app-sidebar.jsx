@@ -41,7 +41,7 @@ const data = {
     },
     {
       name: "Employees",
-      url: "#",
+      url: "/employees",
       icon: Frame,
     },
     {

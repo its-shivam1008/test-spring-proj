@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/sidebar"
 import AddForm from "./AddForm"
 import { InteractiveGridPattern, InteractiveGridPatternDemo } from "./mage-ui/background/InteractiveGridPattern"
+import { Outlet } from "react-router-dom"
 
 export default function Dashboard() {
   return (
@@ -28,8 +29,8 @@ export default function Dashboard() {
             <Separator orientation="vertical" className="mr-2 h-4" />
           </div>
         </header>
-        <div className="flex relative flex-1 flex-col gap-4 p-4 pt-0">
-          <AddForm/>
+        <div className="flex relative flex-1 flex-col gap-4 p-4 pt-0 w-fit">
+            <Outlet/>
         </div>
         {/* </InteractiveGridPatternDemo> */}
       </SidebarInset>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BiLoaderAlt } from "react-icons/bi";
-import { Button } from './components/ui/button';
-import { DataTable } from './components/DataTable';
+import { Button } from '@/components/ui/button';
+import { DataTable } from '@/components/DataTable';
 
 import { MoreHorizontal } from "lucide-react"
  
@@ -117,7 +117,10 @@ const AllEmployee = () => {
         }, 
       ]
   return (
-    <DataTable columns={columns} data={dataOk}></DataTable> 
+    <div className=''>
+
+        <DataTable columns={columns} data={dataOk}></DataTable> 
+    </div>
   )
 }
 
