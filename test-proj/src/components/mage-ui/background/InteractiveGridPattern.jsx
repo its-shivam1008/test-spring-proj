@@ -65,7 +65,7 @@ export function InteractiveGridPattern({
 
 export function InteractiveGridPatternDemo() {
   return (
-    <div className="absolute top-0 flex min-h-screen w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background">
+    <div className="absolute top-0 flex h-full min-h-screen w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background">
       <InteractiveGridPattern
         className={cn(
           "[mask-image:radial-gradient(400px_circle_at_center,white,transparent)]",

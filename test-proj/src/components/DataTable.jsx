@@ -28,7 +28,7 @@ export function DataTable({
 
   return (
     <div>
-      <div className="rounded-md border bg-white md:w-[calc(100dvw-300px)] min-[0px]:max-md:w-[90dvw]">
+      <div className="rounded-md border bg-white md:w-[calc(100dvw-320px)] min-[0px]:max-md:w-[90dvw]">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

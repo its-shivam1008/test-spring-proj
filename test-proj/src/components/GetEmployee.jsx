@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input"
 import { BiLoaderAlt } from "react-icons/bi";
 import { DataTable } from '@/components/DataTable';
 
-import { MoreHorizontal } from "lucide-react"
+import { MoreHorizontal, Pencil } from "lucide-react"
  
 import {
   DropdownMenu,
@@ -98,6 +98,162 @@ const GetEmployee = () => {
         state:"Uttar Pradesh",
         country:"India",
       }, 
+      {
+        id:"lol1234",
+        name: "Shivam Shukla",
+        age: 21,
+        dob: "4-12-2003",
+        doj: "21-05-2025",
+        mobile:"7985218893",
+        address:"19/71, RamNarayan Bazaar",
+        city:"Kanpur",
+        state:"Uttar Pradesh",
+        country:"India",
+      }, 
+      {
+        id:"lol1234",
+        name: "Shivam Shukla",
+        age: 21,
+        dob: "4-12-2003",
+        doj: "21-05-2025",
+        mobile:"7985218893",
+        address:"19/71, RamNarayan Bazaar",
+        city:"Kanpur",
+        state:"Uttar Pradesh",
+        country:"India",
+      }, 
+      {
+        id:"lol1234",
+        name: "Shivam Shukla",
+        age: 21,
+        dob: "4-12-2003",
+        doj: "21-05-2025",
+        mobile:"7985218893",
+        address:"19/71, RamNarayan Bazaar",
+        city:"Kanpur",
+        state:"Uttar Pradesh",
+        country:"India",
+      }, 
+      {
+        id:"lol1234",
+        name: "Shivam Shukla",
+        age: 21,
+        dob: "4-12-2003",
+        doj: "21-05-2025",
+        mobile:"7985218893",
+        address:"19/71, RamNarayan Bazaar",
+        city:"Kanpur",
+        state:"Uttar Pradesh",
+        country:"India",
+      }, 
+      {
+        id:"lol1234",
+        name: "Shivam Shukla",
+        age: 21,
+        dob: "4-12-2003",
+        doj: "21-05-2025",
+        mobile:"7985218893",
+        address:"19/71, RamNarayan Bazaar",
+        city:"Kanpur",
+        state:"Uttar Pradesh",
+        country:"India",
+      }, 
+      {
+        id:"lol1234",
+        name: "Shivam Shukla",
+        age: 21,
+        dob: "4-12-2003",
+        doj: "21-05-2025",
+        mobile:"7985218893",
+        address:"19/71, RamNarayan Bazaar",
+        city:"Kanpur",
+        state:"Uttar Pradesh",
+        country:"India",
+      }, 
+      {
+        id:"lol1234",
+        name: "Shivam Shukla",
+        age: 21,
+        dob: "4-12-2003",
+        doj: "21-05-2025",
+        mobile:"7985218893",
+        address:"19/71, RamNarayan Bazaar",
+        city:"Kanpur",
+        state:"Uttar Pradesh",
+        country:"India",
+      }, 
+      {
+        id:"lol1234",
+        name: "Shivam Shukla",
+        age: 21,
+        dob: "4-12-2003",
+        doj: "21-05-2025",
+        mobile:"7985218893",
+        address:"19/71, RamNarayan Bazaar",
+        city:"Kanpur",
+        state:"Uttar Pradesh",
+        country:"India",
+      }, 
+      {
+        id:"lol1234",
+        name: "Shivam Shukla",
+        age: 21,
+        dob: "4-12-2003",
+        doj: "21-05-2025",
+        mobile:"7985218893",
+        address:"19/71, RamNarayan Bazaar",
+        city:"Kanpur",
+        state:"Uttar Pradesh",
+        country:"India",
+      }, 
+      {
+        id:"lol1234",
+        name: "Shivam Shukla",
+        age: 21,
+        dob: "4-12-2003",
+        doj: "21-05-2025",
+        mobile:"7985218893",
+        address:"19/71, RamNarayan Bazaar",
+        city:"Kanpur",
+        state:"Uttar Pradesh",
+        country:"India",
+      }, 
+      {
+        id:"lol1234",
+        name: "Shivam Shukla",
+        age: 21,
+        dob: "4-12-2003",
+        doj: "21-05-2025",
+        mobile:"7985218893",
+        address:"19/71, RamNarayan Bazaar",
+        city:"Kanpur",
+        state:"Uttar Pradesh",
+        country:"India",
+      }, 
+      {
+        id:"lol1234",
+        name: "Shivam Shukla",
+        age: 21,
+        dob: "4-12-2003",
+        doj: "21-05-2025",
+        mobile:"7985218893",
+        address:"19/71, RamNarayan Bazaar",
+        city:"Kanpur",
+        state:"Uttar Pradesh",
+        country:"India",
+      }, 
+      {
+        id:"lol1234",
+        name: "Shivam Shukla",
+        age: 21,
+        dob: "4-12-2003",
+        doj: "21-05-2025",
+        mobile:"7985218893",
+        address:"19/71, RamNarayan Bazaar",
+        city:"Kanpur",
+        state:"Uttar Pradesh",
+        country:"India",
+      }, 
     ]
   return (
     <div>
@@ -108,8 +264,12 @@ const GetEmployee = () => {
         <div className='my-3'>
           <DataTable columns={columns} data={dataOk}></DataTable> 
         </div>
-        {emp.name && <div className='w-fit h-fit p-5 rounded-[8px] shadow-xl border-2'>
+        {emp.name && <div className='w-fit h-fit p-5 rounded-[8px] shadow-xl transition-colors duration-200 hover:border-blue-400 border-2'>
           <div className='text-md'>
+            <div className="flex gap-5">
+              <div className='font-bold'>Employee id :</div> 
+              <div className="">{emp.id}</div>
+            </div>
             <div className="flex gap-5">
               <div className='font-bold'>Name :</div> 
               <div className="">{emp.name}</div>
