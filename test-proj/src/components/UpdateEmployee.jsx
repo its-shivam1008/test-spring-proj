@@ -1,8 +1,20 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { BiLoaderAlt } from "react-icons/bi";
 import { DataTable } from '@/components/DataTable';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+
 
 import { MoreHorizontal, Pencil, Trash } from "lucide-react"
  
@@ -21,6 +33,7 @@ const UpdateEmployee = () => {
   const [emp, setEmp] = useState({})
   const [editable, setEditable] = useState(false);
   const [editData, setEditData] = useState({});
+  const alertDialog = useRef(null);
 
   const handleClickOnRow = (empData) => {
     setEmp(empData);
@@ -256,13 +269,22 @@ const UpdateEmployee = () => {
     ]
   return (
     <div>
-      {/* {editable ? <Input type="text" className='max-w-40' value={emp.name} /> :emp.name} */}
-      {/* 
-        <div className="flex justify-between">
-          {editable ? <Button onClick={() => setEditable(false)} className="cursor-pointer" >Save</Button> : <Button onClick={() => setEditable(true)} className="cursor-pointer" ><Pencil />Edit</Button>}
-          <Button className="cursor-pointer" variant={"destructive"}><Trash />Delete</Button>
-        </div>
-      */}
+      <AlertDialog>
+        <AlertDialogTrigger ref={alertDialog} className='hidden'>open</AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete this employee's data
+              and remove it from our servers.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction>Continue</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
         <div className="flex w-full max-w-sm items-center space-x-2">
             <Input type="text" placeholder="Find by id or name" />
             <Button type="submit">Find</Button>
@@ -314,7 +336,7 @@ const UpdateEmployee = () => {
             </div>
             <div className="flex justify-between">
               {editable ? <Button onClick={() => setEditable(false)} className="cursor-pointer" >Save</Button> : <Button onClick={() => setEditable(true)} className="cursor-pointer" ><Pencil />Edit</Button>}
-              <Button className="cursor-pointer" variant={"destructive"}><Trash />Delete</Button>
+              <Button className="cursor-pointer" onClick={() => alertDialog.current && alertDialog.current.click()}  variant={"destructive"}><Trash />Delete</Button>
             </div>
           </div>
         </div>}

@@ -14,6 +14,10 @@ public class User {
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
+    private String designation;
+    @Column(nullable = false)
+    private String salary;
+    @Column(nullable = false)
     private LocalDate dob;
     @Column(nullable = false)
     private int age;
@@ -25,6 +29,23 @@ public class User {
     private String address;
     @Column
     private String city;
+
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
+
+    public String getSalary() {
+        return salary;
+    }
+
+    public void setSalary(String salary) {
+        this.salary = salary;
+    }
+
     @Column
     private String state;
 

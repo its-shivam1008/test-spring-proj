@@ -53,6 +53,12 @@ public class UserServices {
             if(updatedUser.getName() != null){
                 existingUser.setName(updatedUser.getName());
             }
+            if(updatedUser.getDesignation() != null){
+                existingUser.setDesignation(updatedUser.getDesignation());
+            }
+            if(updatedUser.getSalary() != null){
+                existingUser.setSalary(updatedUser.getSalary());
+            }
             if(updatedUser.getDob() != null){
                 existingUser.setDob(updatedUser.getDob());
             }

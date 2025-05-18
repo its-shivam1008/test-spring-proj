@@ -8,9 +8,9 @@ const App = () => {
   const SERVER_URL = 'http://localhost:8080/user'
   
   
-  useEffect(() => {
-    fetchAllUser();
-  }, [])
+  // useEffect(() => {
+  //   fetchAllUser();
+  // }, [])
 
 
 

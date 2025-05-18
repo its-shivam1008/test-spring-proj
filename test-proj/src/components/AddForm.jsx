@@ -3,7 +3,7 @@ import { Button } from './ui/button';
 
 const AddForm = () => {
 
-    const [changeValue, setChangeValue] = useState({name:"", age:"", doj:"", dob:"", mobile:"", address:"", city:"", state:"", country:""});
+    const [changeValue, setChangeValue] = useState({name:"", age:"", doj:"", dob:"", mobile:"", address:"", city:"", state:"", country:"", designation:"", salary:""});
     const [isLoading, setIsLoading] = useState(false);
 
     const [isLoadingPlace, setIsLoadingPlace] = useState(false);
@@ -106,17 +106,22 @@ const AddForm = () => {
         }
         
       }
+
+      const SERVER_URL = 'http://localhost:8080/user'
     
       const handelSubmit = async (event) => {
         event.preventDefault;
         try{
           console.log(changeValue)
+          alert(JSON.stringify(changeValue));
           const response =await fetch(SERVER_URL, {
             method:"POST",
             headers:{"Content-type":"application/json"},
             body:JSON.stringify(changeValue)
           })
           const result = await  response.json();
+          console.log(result)
+          alert(JSON.stringify(result))
         }catch(err){
           setIsLoading(false);
           alert("some error occured while creating NEW user"+JSON.stringify(err));
@@ -129,6 +134,14 @@ const AddForm = () => {
                 <div className="space-x-4">
                   <label className={`${isLock ? "text-gray-400" : "text-black"}`} htmlFor="name">Name </label>
                   <input type="text" name="name" id="name" className='w-50 p-2 rounded-[6px] outline-gray-400 outline-[2px] focus:outline-black placeholder:text-gray-500'  disabled={isLock} onChange={handleChannge} value={changeValue.name} placeholder='Sachin'/>
+                </div>
+                <div className="space-x-4">
+                  <label className={`${isLock ? "text-gray-400" : "text-black"}`} htmlFor="name">Designation </label>
+                  <input type="text" name="designation" id="designation" className='w-50 p-2 rounded-[6px] outline-gray-400 outline-[2px] focus:outline-black placeholder:text-gray-500'  disabled={isLock} onChange={handleChannge} value={changeValue.designation} placeholder='CTO'/>
+                </div>
+                <div className="space-x-4">
+                  <label className={`${isLock ? "text-gray-400" : "text-black"}`} htmlFor="name">Salary </label>
+                  <input type="text" name="salary" id="salary" className='w-50 p-2 rounded-[6px] outline-gray-400 outline-[2px] focus:outline-black placeholder:text-gray-500'  disabled={isLock} onChange={handleChannge} value={changeValue.salary} placeholder='205020'/>
                 </div>
                 <div className="space-x-4">
                   <label className={`${isLock ? "text-gray-400" : "text-black"}`} htmlFor="dob">Date of birth </label>
