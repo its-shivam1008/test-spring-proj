@@ -1,6 +1,0 @@
-[phases.build] 
-cmds = ['mvn clean package -DskipTests'] 
-nixPkgs = ['jdk17', 'maven'] 
-
-[start] 
-cmd = 'java -jar target/*.jar'
