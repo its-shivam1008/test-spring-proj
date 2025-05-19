@@ -33,9 +33,9 @@ public class UserServices {
         }
     }
 
-    public User getUserByNameAndDob(String name, LocalDate dob){
+    public User getUserById(Long id){
         try{
-            Optional<User> user = userRepository.findByNameAndDob(name, dob);
+            Optional<User> user = userRepository.findById(id);
             if(user.isPresent()){
                 return user.get();
             }else{
@@ -46,10 +46,18 @@ public class UserServices {
         }
     }
 
-
-    public User updateUserByNameAndDobService(String name, LocalDate dob, User updatedUser){
+    public List<User> getUsersByNameIdOrDesig(String keyword){
         try{
-            User existingUser  = getUserByNameAndDob(name, dob);
+            List<User> requiredList = userRepository.searchByKeyword(keyword);
+            return requiredList;
+        }catch(RuntimeException e){
+            throw new RuntimeException("Some error occured :"+e.getMessage());
+        }
+    }
+
+    public User updateUserById(Long id, User updatedUser){
+        try{
+            User existingUser  = getUserById(id);
             if(updatedUser.getName() != null){
                 existingUser.setName(updatedUser.getName());
             }
@@ -91,10 +99,10 @@ public class UserServices {
         }
     }
 
-    public void deleteUserByNameAndDobService(String name, LocalDate dob){
+    public void deleteUserById(Long id){
         try{
-            getUserByNameAndDob(name, dob);
-            userRepository.deleteByNameAndDob(name, dob);
+            getUserById(id);
+            userRepository.deleteById(id);
         }catch(RuntimeException e){
             throw new RuntimeException("Error in deleting the User : "+e.getMessage());
         }

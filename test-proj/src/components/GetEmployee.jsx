@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { BiLoaderAlt } from "react-icons/bi";
 import { DataTable } from '@/components/DataTable';
 
-import { MoreHorizontal, Pencil } from "lucide-react"
+import { LoaderCircle, MoreHorizontal, Pencil } from "lucide-react"
  
 import {
   DropdownMenu,
@@ -14,6 +14,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { toast } from 'sonner';
 
 
 const GetEmployee = () => {
@@ -22,6 +23,32 @@ const GetEmployee = () => {
 
   const handleClickOnRow = (empData) => {
     setEmp(empData)
+  }
+
+  const [searchValue, setSearchValue] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const [userArray, setUserArray] = useState([{name:"", age:"", doj:"", dob:"", mobile:"", address:"", city:"", state:"", country:""}]);
+  
+  useEffect(() => {
+    fetchAllUser();
+  }, [])
+  const fetchAllUser = async () => {
+    try{
+      setIsLoading(true);
+      const response =await fetch(import.meta.env.VITE_SERVER_URL)
+      const result = await  response.json();
+      setUserArray(() =>(
+        [
+          ...result
+        ]
+      ))
+      setIsLoading(false);
+    }catch(err){
+      setIsLoading(false);
+      toast("Some error occured", {
+        description: JSON.stringify(err),
+      })
+    }
   }
 
   const columns = [
@@ -72,197 +99,34 @@ const GetEmployee = () => {
         header: "Country",
       }
     ]
+
+  const handleFind = async () => {
+    try{
+      setIsLoading(true);
+      const response =await fetch(import.meta.env.VITE_SERVER_URL+`/search/${searchValue}`)
+      const result = await  response.json();
+      setUserArray(() =>(
+        [...result]
+      ))
+      toast(`${userArray.length} employees found`);
+      setIsLoading(false);
+    }catch(err){
+      setIsLoading(false);
+      toast("Some error occured", {
+        description: JSON.stringify(err),
+      })
+    }
+  }
   
-    const dataOk = [ 
-      {
-        id:"lol1234",
-        name: "Sumitra Mahajan",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-      {
-        id:"lol1234",
-        name: "Shivam Shukla",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-      {
-        id:"lol1234",
-        name: "Shivam Shukla",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-      {
-        id:"lol1234",
-        name: "Shivam Shukla",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-      {
-        id:"lol1234",
-        name: "Shivam Shukla",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-      {
-        id:"lol1234",
-        name: "Shivam Shukla",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-      {
-        id:"lol1234",
-        name: "Shivam Shukla",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-      {
-        id:"lol1234",
-        name: "Shivam Shukla",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-      {
-        id:"lol1234",
-        name: "Shivam Shukla",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-      {
-        id:"lol1234",
-        name: "Shivam Shukla",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-      {
-        id:"lol1234",
-        name: "Shivam Shukla",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-      {
-        id:"lol1234",
-        name: "Shivam Shukla",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-      {
-        id:"lol1234",
-        name: "Shivam Shukla",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-      {
-        id:"lol1234",
-        name: "Shivam Shukla",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-      {
-        id:"lol1234",
-        name: "Shivam Shukla",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-    ]
   return (
     <div>
         <div className="flex w-full max-w-sm items-center space-x-2">
-            <Input type="text" placeholder="Find by id or name" />
-            <Button type="submit">Find</Button>
+            <Input type="text" onChange={(e) => setSearchValue(e.target.value)} value={searchValue} placeholder="Find by id, name or Desig.." />
+            <Button onClick={handleFind} type="submit">Find</Button>
         </div>
         <div className='my-3'>
-          <DataTable columns={columns} data={dataOk}></DataTable> 
+           {isLoading ? <div className='flex justify-center items-center w-[calc(100dvw-320px)] h-[calc(100dvh-120px)]'> <LoaderCircle/> </div> :<DataTable columns={columns} data={userArray}></DataTable> }
+           {/* <DataTable columns={columns} data={dataOk}></DataTable> */}
         </div>
         {emp.name && <div className='w-fit h-fit p-5 rounded-[8px] shadow-xl transition-colors duration-200 hover:border-blue-400 border-2'>
           <div className='text-md'>

@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BiLoaderAlt } from "react-icons/bi";
 import { Button } from '@/components/ui/button';
 import { DataTable } from '@/components/DataTable';
 
-import { MoreHorizontal } from "lucide-react"
+import { LoaderCircle, MoreHorizontal } from "lucide-react"
  
 import {
   DropdownMenu,
@@ -13,8 +13,36 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { toast } from 'sonner';
 
 const AllEmployee = () => {
+
+    
+    const [isLoading, setIsLoading] = useState(false);
+    const [userArray, setUserArray] = useState([{name:"", age:"", doj:"", dob:"", mobile:"", address:"", city:"", state:"", country:""}]);
+
+    useEffect(() => {
+      fetchAllUser();
+    }, [])
+      const fetchAllUser = async () => {
+        try{
+          setIsLoading(true);
+          const response =await fetch(import.meta.env.VITE_SERVER_URL)
+          const result = await  response.json();
+          setUserArray(() =>(
+            [
+              ...result
+            ]
+          ))
+          setIsLoading(false);
+        }catch(err){
+          setIsLoading(false);
+          toast("Some error occured", {
+            description: JSON.stringify(err),
+          })
+        }
+      }
+
     const columns = [
         {
           accessorKey: "name",
@@ -63,51 +91,21 @@ const AllEmployee = () => {
                   <DropdownMenuItem
                     onClick={() => {
                       navigator.clipboard.writeText(emp.id)
-                      alert(emp.id)
+                      toast("Employee id copied")
                     }}
                   >
-                    Copy payment ID
+                    Copy employee ID
                   </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>View customer</DropdownMenuItem>
-                  <DropdownMenuItem>View payment details</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             )
           },
         },
       ]
-    
-      const dataOk = [ 
-        {
-          id:"lol1234",
-          name: "Shivam Shukla",
-          age: 21,
-          dob: "4-12-2003",
-          doj: "21-05-2025",
-          mobile:"7985218893",
-          address:"19/71, RamNarayan Bazaar",
-          city:"Kanpur",
-          state:"Uttar Pradesh",
-          country:"India",
-        }, 
-        {
-          id:"lol1234",
-          name: "Shivam Shukla",
-          age: 21,
-          dob: "4-12-2003",
-          doj: "21-05-2025",
-          mobile:"7985218893",
-          address:"19/71, RamNarayan Bazaar",
-          city:"Kanpur",
-          state:"Uttar Pradesh",
-          country:"India",
-        }, 
-      ]
   return (
-    <div className=''>
-
-        <DataTable columns={columns} data={dataOk}></DataTable> 
+    <div>
+      {isLoading ? <div className='flex justify-center items-center w-[calc(100dvw-320px)] h-[calc(100dvh-120px)]'> <LoaderCircle/> </div> :<DataTable columns={columns} data={userArray}></DataTable> }
+      {/* <DataTable columns={columns} data={dataOk}></DataTable> */}
     </div>
   )
 }

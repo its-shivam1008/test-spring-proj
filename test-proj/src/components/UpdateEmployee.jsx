@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { BiLoaderAlt } from "react-icons/bi";
@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/alert-dialog"
 
 
-import { MoreHorizontal, Pencil, Trash } from "lucide-react"
+import { LoaderCircle, MoreHorizontal, Pencil, Trash } from "lucide-react"
  
 import {
   DropdownMenu,
@@ -26,12 +26,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { toast } from 'sonner';
 
 
 const UpdateEmployee = () => {
 
   const [emp, setEmp] = useState({})
   const [editable, setEditable] = useState(false);
+  const [searchValue, setSearchValue] = useState();
   const [editData, setEditData] = useState({});
   const alertDialog = useRef(null);
 
@@ -47,6 +49,85 @@ const UpdateEmployee = () => {
       [name]:value
     }))
   }
+
+  
+    const [isLoading, setIsLoading] = useState(false);
+    const [userArray, setUserArray] = useState([{name:"", age:"", doj:"", dob:"", mobile:"", address:"", city:"", state:"", country:""}]);
+    
+    useEffect(() => {
+      fetchAllUser();
+    }, [])
+    const fetchAllUser = async () => {
+      try{
+        setIsLoading(true);
+        const response =await fetch(import.meta.env.VITE_SERVER_URL)
+        const result = await  response.json();
+        setUserArray(() =>(
+          [
+            ...result
+          ]
+        ))
+        setIsLoading(false);
+      }catch(err){
+        setIsLoading(false);
+        toast("Some error occured", {
+          description: JSON.stringify(err),
+        })
+      }
+    }
+
+    const handleSave = async () => {
+      try{
+        const response = await fetch(import.meta.env.VITE_SERVER_URL+`/${emp.id}`,{
+          method:"PUT",
+          headers:{"Content-type":"application/json"},
+          body:JSON.stringify(editData)
+        });
+        console.log(response)
+        await fetchAllUser();
+        toast("Employee updated");
+        setEmp(editData);
+        setEditable(false);
+      }catch(err){
+        toast("Some error occured", {
+          description: JSON.stringify(err),
+        })
+      }
+    }
+
+    const handleFind = async () => {
+        try{
+          setIsLoading(true);
+          const response =await fetch(import.meta.env.VITE_SERVER_URL+`/search/${searchValue}`)
+          const result = await  response.json();
+          setUserArray(() =>(
+            [...result]
+          ))
+          toast(`${userArray.length} employees found`);
+          setIsLoading(false);
+        }catch(err){
+          setIsLoading(false);
+          toast("Some error occured", {
+            description: JSON.stringify(err),
+          })
+        }
+      }
+      
+    const handleDelete = async () => {
+      try{
+          const response = await fetch(import.meta.env.VITE_SERVER_URL+`/${emp.id}`,{
+            method:"DELETE"
+          })
+          toast("Employee deleted")
+          await fetchAllUser();
+          setEmp({name:null});
+      }catch(err){
+        toast("Some error occured", {
+          description: JSON.stringify(err),
+        })
+      }
+    }
+
 
   const columns = [
       {
@@ -96,177 +177,6 @@ const UpdateEmployee = () => {
         header: "Country",
       }
     ]
-  
-    const dataOk = [ 
-      {
-        id:"lol1234",
-        name: "Sumitra Mahajan",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-      {
-        id:"lol1234",
-        name: "Shivam Shukla",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-      {
-        id:"lol1234",
-        name: "Shivam Shukla",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-      {
-        id:"lol1234",
-        name: "Shivam Shukla",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-      {
-        id:"lol1234",
-        name: "Shivam Shukla",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-      {
-        id:"lol1234",
-        name: "Shivam Shukla",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-      {
-        id:"lol1234",
-        name: "Shivam Shukla",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-      {
-        id:"lol1234",
-        name: "Shivam Shukla",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-      {
-        id:"lol1234",
-        name: "Shivam Shukla",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-      {
-        id:"lol1234",
-        name: "Shivam Shukla",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-      {
-        id:"lol1234",
-        name: "Shivam Shukla",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-      {
-        id:"lol1234",
-        name: "Shivam Shukla",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-      {
-        id:"lol1234",
-        name: "Shivam Shukla",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-      {
-        id:"lol1234",
-        name: "Shivam Shukla",
-        age: 21,
-        dob: "4-12-2003",
-        doj: "21-05-2025",
-        mobile:"7985218893",
-        address:"19/71, RamNarayan Bazaar",
-        city:"Kanpur",
-        state:"Uttar Pradesh",
-        country:"India",
-      }, 
-    ]
   return (
     <div>
       <AlertDialog>
@@ -281,16 +191,17 @@ const UpdateEmployee = () => {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction>Continue</AlertDialogAction>
+            <AlertDialogAction onClick={handleDelete}>Continue</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
         <div className="flex w-full max-w-sm items-center space-x-2">
-            <Input type="text" placeholder="Find by id or name" />
-            <Button type="submit">Find</Button>
+            <Input type="text" onChange={(e) => setSearchValue(e.target.value)} value={searchValue} placeholder="Find by id, name or Desig.." />
+            <Button onClick={handleFind} type="submit">Find</Button>
         </div>
         <div className='my-3'>
-          <DataTable columns={columns} data={dataOk}></DataTable> 
+          {isLoading ? <div className='flex justify-center items-center w-[calc(100dvw-320px)] h-[calc(100dvh-120px)]'> <LoaderCircle/> </div> :<DataTable columns={columns} data={userArray}></DataTable> }
+          {/* <DataTable columns={columns} data={dataOk}></DataTable> */}
         </div>
         {emp.name && <div className='w-fit h-fit p-5 rounded-[8px] shadow-xl transition-colors duration-200 hover:border-blue-400 border-2'>
           <div className='text-md space-y-1'>
@@ -301,6 +212,14 @@ const UpdateEmployee = () => {
             <div className="flex gap-5">
               <div className='font-bold'>Name :</div> 
               <div className="">{editable ? <Input onChange={handleChangeInput} name="name" type="text" className='max-w-40' value={editData.name} /> :emp.name}</div>
+            </div>
+            <div className="flex gap-5">
+              <div className='font-bold'>Designation :</div> 
+              <div className="">{editable ? <Input onChange={handleChangeInput} name="designation" type="text" className='max-w-40' value={editData.designation} /> :emp.designation}</div>
+            </div>
+            <div className="flex gap-5">
+              <div className='font-bold'>Salary :</div> 
+              <div className="">{editable ? <Input onChange={handleChangeInput} name="salary" type="text" className='max-w-40' value={editData.salary} /> :emp.salary}</div>
             </div>
             <div className="flex gap-5">
               <div className='font-bold'>Date of Birth :</div> 
@@ -335,7 +254,7 @@ const UpdateEmployee = () => {
               <div className="">{emp.country}</div>
             </div>
             <div className="flex justify-between">
-              {editable ? <Button onClick={() => setEditable(false)} className="cursor-pointer" >Save</Button> : <Button onClick={() => setEditable(true)} className="cursor-pointer" ><Pencil />Edit</Button>}
+              {editable ? <Button onClick={handleSave} className="cursor-pointer" >Save</Button> : <Button onClick={() => setEditable(true)} className="cursor-pointer" ><Pencil />Edit</Button>}
               <Button className="cursor-pointer" onClick={() => alertDialog.current && alertDialog.current.click()}  variant={"destructive"}><Trash />Delete</Button>
             </div>
           </div>

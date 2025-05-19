@@ -35,11 +35,23 @@ public class UserControllers {
         }
     }
 
-    @GetMapping("/{name}/{dob}")
-    public ResponseEntity<?> getEmployeeById(@PathVariable String name, @PathVariable LocalDate dob){
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getEmployeeById(@PathVariable Long id){
         try{
-            User employee = userServices.getUserByNameAndDob(name, dob);
+            User employee = userServices.getUserById(id);
             return ResponseEntity.status(HttpStatus.OK).body(employee);
+        }catch(RuntimeException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error");
+        }
+    }
+
+    @GetMapping("/search/{keyword}")
+    public ResponseEntity<?> getEmployeeBySearchQuery(@PathVariable String keyword){
+        try{
+            List<User> employees = userServices.getUsersByNameIdOrDesig(keyword);
+            return ResponseEntity.status(HttpStatus.OK).body(employees);
         }catch(RuntimeException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }catch(Exception e){
@@ -52,10 +64,11 @@ public class UserControllers {
         return userServices.createNewUser(user);
     }
 
-    @PutMapping("/{name}/{dob}")
-    public ResponseEntity<?> updateUser(@RequestBody User user, @PathVariable String name, @PathVariable LocalDate dob){
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateUser(@RequestBody User user, @PathVariable("id") Long id){
         try{
-            User us = userServices.updateUserByNameAndDobService(name, dob, user);
+
+            User us = userServices.updateUserById(id, user);
             return ResponseEntity.status(HttpStatus.OK).body(us);
         }catch(RuntimeException e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -64,10 +77,11 @@ public class UserControllers {
         }
     }
 
-    @DeleteMapping("/{name}/{dob}")
-    public ResponseEntity<String> deleteUser(@PathVariable String name, @PathVariable LocalDate dob){
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable("id") Long id){
         try{
-            userServices.deleteUserByNameAndDobService(name, dob);
+
+            userServices.deleteUserById(id);
             return ResponseEntity.status(HttpStatus.OK).body("Deleted thee employee:");
         }catch(RuntimeException e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

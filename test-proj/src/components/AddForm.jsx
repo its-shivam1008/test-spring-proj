@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { Button } from './ui/button';
+import { toast } from "sonner"
 
 const AddForm = () => {
 
     const [changeValue, setChangeValue] = useState({name:"", age:"", doj:"", dob:"", mobile:"", address:"", city:"", state:"", country:"", designation:"", salary:""});
-    const [isLoading, setIsLoading] = useState(false);
 
     const [isLoadingPlace, setIsLoadingPlace] = useState(false);
     const [isLock, setIsLock] = useState(false)
+
+    const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
     const handleFindUser = async () => {
         try{
@@ -36,17 +38,6 @@ const AddForm = () => {
           alert("some error occured while UPDATING user"+JSON.stringify(err));
         }
       }
-    
-    const handleDeleteUser = async () => {
-    try{
-        const response = await fetch(SERVER_URL+`/${changeValue.name}/${changeValue.dob}`,{
-        method:"DELETE"
-        })
-        await fetchAllUser();
-    }catch(err){
-        alert("some error occured while DELETING user"+JSON.stringify(err));
-    }
-    }
 
     const  handleEditUser = () => {
     setIsLock(false);
@@ -106,25 +97,24 @@ const AddForm = () => {
         }
         
       }
-
-      const SERVER_URL = 'http://localhost:8080/user'
     
       const handelSubmit = async (event) => {
         event.preventDefault;
         try{
-          console.log(changeValue)
-          alert(JSON.stringify(changeValue));
           const response =await fetch(SERVER_URL, {
             method:"POST",
             headers:{"Content-type":"application/json"},
             body:JSON.stringify(changeValue)
           })
           const result = await  response.json();
-          console.log(result)
-          alert(JSON.stringify(result))
+          toast("Employee added", {
+            description: "The employee has been added you can check it ",
+          })
         }catch(err){
           setIsLoading(false);
-          alert("some error occured while creating NEW user"+JSON.stringify(err));
+          toast("Some error occured", {
+            description: JSON.stringify(err),
+          })
         }
       }
 

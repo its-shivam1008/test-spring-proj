@@ -19,6 +19,9 @@ target/
 *.iml
 *.ipr
 
+### ENVIRONMENT ###
+.env
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
